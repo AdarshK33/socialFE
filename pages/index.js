@@ -3,7 +3,7 @@ import Login from "./login";
 import SignUp from "./signup";
 
 
-import { userLoginApi } from "../redux/actions/login";
+import { userLoginApi, userSignUpSuccess } from "../redux/actions/login";
 import { useDispatch, useSelector } from "react-redux";
 
 import { withIronSessionSsr } from "iron-session/next";
@@ -18,13 +18,17 @@ export default function Index() {
   };
 
   useEffect(() => {
-    let loginData = {
-      email: "adarsh13@gmail.com",
-      password: "1234",
-    };
-    dispatch(userLoginApi(loginData));
-  }, []);
 
+   
+    
+      if(isLogin){
+      dispatch(userSignUpSuccess());
+      }
+    
+  }, [isLogin]);
+
+
+ 
   return (
     <div style={{ textAlign: "center", margin: "50px" }}>
       {/* Render Login or Signup form based on isLogin state */}
@@ -57,7 +61,7 @@ export const getServerSideProps = withIronSessionSsr(
       if (user) {
         return {
           redirect: {
-            destination: "/dashboard",
+            destination: "/myProfile",
             permanent: false,
           },
         };

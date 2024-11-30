@@ -1,5 +1,5 @@
 import { client } from "../../utils/axios";
-import { isLoggedIn } from "../../redux/actions/login";
+import { myProfile } from "../../redux/actions/login";
 import { useDispatch, useSelector } from "react-redux";
 
 export const logoutApi = () => {
@@ -13,7 +13,7 @@ export const logoutApi = () => {
           console.log("logoutApi session expired");
           location.reload()
           dispatch(
-            isLoggedIn("")
+            myProfile("")
           );
         }
       })

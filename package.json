@@ -1,6 +1,6 @@
 {
-  "name": "nextjs",
-  "version": "5.0.0",
+  "name": "socailweb",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/cache": "^11.6.0",
