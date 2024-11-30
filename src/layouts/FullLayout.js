@@ -87,7 +87,10 @@ const FullLayout = ({ children }) => {
           }}
         >
           <Box sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
+          {router.route !== "/" && router.route !== "/login" && (
+
           <Footer />
+          )}
         </Container>
       </PageWrapper>
     </MainWrapper>
