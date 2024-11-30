@@ -10,11 +10,18 @@ import FullLayout from "../src/layouts/FullLayout";
 import "../styles/style.css";
 import withRedux from "next-redux-wrapper";
 import { mainStore } from "../redux/store";
+import { myProfileApi } from "../redux/actions/login";
+import { useDispatch, useSelector } from "react-redux";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+      dispatch(myProfileApi());
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>

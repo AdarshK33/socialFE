@@ -5,40 +5,17 @@ const Menuitems = [
     href: "/",
   },
   {
-    title: "Buttons",
+    title: "AddPost",
     icon: "disc",
-    href: "/buttons",
+    href: "/addpost",
   },
   {
-    title: "Forms",
+    title: "Friend",
     icon: "layout",
-    href: "/forms",
+    href: "/Friend",
   },
-  {
-    title: "Alerts",
-    icon: "info",
-    href: "/alerts",
-  },
-  {
-    title: "Ratings",
-    icon: "star",
-    href: "/rating",
-  },
-  {
-    title: "Images",
-    icon: "image",
-    href: "/image",
-  },
-  {
-    title: "Pagination",
-    icon: "user",
-    href: "/pagination",
-  },
-  {
-    title: "Tables",
-    icon: "grid",
-    href: "/table",
-  },
+
+ 
 ];
 
 export default Menuitems;

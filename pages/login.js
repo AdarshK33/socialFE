@@ -29,7 +29,7 @@ import { sessionOption } from "../utils/session";
 import logo_loginpage from "../assets/images/users/1.jpg";
 import Image from "next/image";
 
-import { userLoginApi } from "../redux/actions/login";
+import { myProfileApi, userLoginApi } from "../redux/actions/login";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = (user) => {
@@ -88,6 +88,7 @@ const Login = (user) => {
    
     
       router.push("/dashboard");
+      dispatch(myProfileApi());
       
     }
   }, [isLogin]);
