@@ -87,7 +87,7 @@ const Login = (user) => {
     ) {
    
     
-      router.push("/dashboard");
+      router.push("/myProfile");
       dispatch(myProfileApi());
       
     }

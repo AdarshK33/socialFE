@@ -3,7 +3,7 @@ import Login from "./login";
 import SignUp from "./signup";
 
 
-import { userLoginApi } from "../redux/actions/login";
+import { userLoginApi, userSignUpSuccess } from "../redux/actions/login";
 import { useDispatch, useSelector } from "react-redux";
 
 import { withIronSessionSsr } from "iron-session/next";
@@ -16,6 +16,17 @@ export default function Index() {
   const toggleForm = () => {
     setIsLogin(!isLogin); // Toggle between login and signup
   };
+
+  useEffect(() => {
+
+   
+    
+      if(isLogin){
+      dispatch(userSignUpSuccess());
+      }
+    
+  }, [isLogin]);
+
 
  
   return (

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import DashBoard from "../../src/components/dashboard";
+import ProfileDashBoard from "../../src/components/dashboard";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOption } from "../../utils/session";
 
 function index() {
   return (
     <>
-      <DashBoard />
+      <ProfileDashBoard />
     </>
   );
 }
