@@ -17,14 +17,7 @@ export default function Index() {
     setIsLogin(!isLogin); // Toggle between login and signup
   };
 
-  useEffect(() => {
-    let loginData = {
-      email: "adarsh13@gmail.com",
-      password: "1234",
-    };
-    dispatch(userLoginApi(loginData));
-  }, []);
-
+ 
   return (
     <div style={{ textAlign: "center", margin: "50px" }}>
       {/* Render Login or Signup form based on isLogin state */}

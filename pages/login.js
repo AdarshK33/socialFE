@@ -20,18 +20,27 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import styles from "./login.module.css";
 // import { useDispatch, useSelector } from "react-redux";
 // import { userLoginApi, getNotificationApi, myProfileApi } from "../redux/actions/login";
-// import { withIronSessionSsr } from "iron-session/next";
-import Router from "next/router";
+import { useRouter } from "next/router";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// import { sessionOption } from "../utils/session";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOption } from "../utils/session";
 import logo_loginpage from "../assets/images/users/1.jpg";
 import Image from "next/image";
 
+import { userLoginApi } from "../redux/actions/login";
+import { useDispatch, useSelector } from "react-redux";
+
 const Login = (user) => {
  
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { isLogin } = useSelector((state) => {
+    return state.loginReducer;
+  });
 
+  console.log(isLogin,"isLogin")
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
   const [username, setUsername] = useState();
@@ -39,6 +48,7 @@ const Login = (user) => {
   const [showPassword, setShowPassword] = useState(false);
   const [itemData, setItemData] = useState();
 
+  
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -62,10 +72,25 @@ const Login = (user) => {
         password: password,
       };
       setItemData(loginData);
+      dispatch(userLoginApi(loginData));
     }
   };
 
 
+  useEffect(() => {
+    if (
+     
+      isLogin !== "" &&
+      isLogin !== undefined &&
+      isLogin.length !== 0
+
+    ) {
+   
+    
+      router.push("/dashboard");
+      
+    }
+  }, [isLogin]);
 
 
 //   console.log(Boolean(username), "hello Boolean(username)")
@@ -91,7 +116,7 @@ const Login = (user) => {
         <Stack spacing={3}>
           <FormControl variant="outlined">
             <InputLabel htmlFor="outlined-adornment-account">
-              User Name
+            Email
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-account"
@@ -100,7 +125,8 @@ const Login = (user) => {
                   <AccountCircleIcon />
                 </InputAdornment>
               }
-              label="User Name"
+              label="Email"
+              //username
               value={username}
               onChange={handleUsernameChange}
             />
@@ -159,3 +185,29 @@ const Login = (user) => {
 };
 
 export default Login;
+
+// // its working
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = await req?.session?.user;
+
+    // console.log("hello login", user);
+
+  
+      return {
+        redirect: {
+          destination: "/dashboard",
+          permanent: false,
+        },
+      };
+    
+   
+
+    return {
+      props: {
+        user: req.session.user || null,
+      },
+    };
+  },
+  sessionOption
+);

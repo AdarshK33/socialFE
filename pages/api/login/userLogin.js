@@ -37,11 +37,11 @@ console.log(body,"bbbbbb")
     })
     .catch((err) => {
       console.log("error caught in -> api/login/userLogin", err);
-      console.log(err.response,"error");
-      // if (err?.response?.data) {
-      //   const { status = {} } = err?.response;
-      //   res.status(status).json(err.response.data);
-      // } else res.status(500).json({ message: "something went wrong" });
+      // console.log("rrrrrrrrrrrrrrrr",err.response.data);
+      if (err?.response) {
+        const { status = {} } = err?.response;
+        res.status(status).json(err?.response?.data);
+      } else res.status(500).json({ message: "something went wrong" });
       Promise.reject(err);
     });
 

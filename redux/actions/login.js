@@ -2,7 +2,6 @@ import {
   USER_LOGIN_LOADING,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
-
   
 } from "../types/types";
 
@@ -37,66 +36,29 @@ export const userLoginApi = (data) => {
     client
       .post("/api/login/userLogin", data)
       .then((response) => {
-        // console.log("hello userLoginApi", response);
-        toast.info("Login Successfully !!!");
-        if (response?.data?.statusCode === 201) {
-          // console.log("hello Login post==>", response.data);
-          dispatch(
-            userLoginSuccess(
-              response?.data?.statusCode,
-              "Login Post Successfully",
-              "LOGIN POST"
-            )
-          );
-          dispatch(
-            userRole(
-              response?.data?.result?.role,
-              "Login role saved Successfully",
-              "LOGIN DETAILS"
-            )
-          );
-          dispatch(
-            userBrand(
-              response?.data?.result?.brand,
-              "Login brand saved Successfully",
-              "LOGIN DETAILS"
-            )
-          );
-          dispatch(
-            userEmail(
-              response?.data?.result?.email,
-              "Login email saved Successfully",
-              "LOGIN DETAILS"
-            )
-          );
-          // console.log("userLoginApi authorities", response.data);
-          dispatch(userAuthorities(response?.data?.result?.authorities));
-          // dispatch(getDashBoardApi());
-          dispatch(getNotificationApi());
-          dispatch(myProfileApi());
-
-          // console.log(
-          //   "response?.data?.result?.role",
-          //   response?.data?.result?.role
-          // );
-
-          // navigate('/dashboard/dashboard');
+        // console.log("hello userLoginApi", response?.data);
+       
+        if (response?.data?.success ) {
+          toast.info("Login Successfully !!!");
+          dispatch(userLoginSuccess(response?.data?.user))
         } else throw new Error("");
       })
       .catch((err) => {
+        if(err?.response){
         const { status = {} } = err?.response;
         if (status == 502) {
           toast.error("Bad gateway !!!");
         }
-        if (status == 401) {
+        if (status == 401) 
+          {
           toast.error("Please enter correct user name and password");
         }
         else {
           toast.error("User not found!!!");
         }
-
         console.log("error caught in -> actions/login", err);
         dispatch(userLoginFailure(err, "Something went wrong", "LOGIN POST"));
+      }
       });
   };
 };
