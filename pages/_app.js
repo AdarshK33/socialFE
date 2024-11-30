@@ -8,10 +8,12 @@ import theme from "../src/theme/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import FullLayout from "../src/layouts/FullLayout";
 import "../styles/style.css";
+import withRedux from "next-redux-wrapper";
+import { mainStore } from "../redux/store";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-export default function MyApp(props) {
+function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
@@ -35,3 +37,4 @@ MyApp.propTypes = {
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
 };
+export default withRedux(mainStore, { debug: false })(MyApp);
