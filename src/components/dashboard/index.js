@@ -78,13 +78,13 @@ const ProfileDashBoard = () => {
                 </Typography>
               </Box>
               <Box textAlign="center">
-                <Typography variant="h6">{myProfile?.followers}</Typography>
+                <Typography variant="h6">{myProfile?.followers??0}</Typography>
                 <Typography variant="caption" color="textSecondary">
                   Followers
                 </Typography>
               </Box>
               <Box textAlign="center">
-                <Typography variant="h6">{myProfile?.following}</Typography>
+                <Typography variant="h6">{myProfile?.following??0}</Typography>
                 <Typography variant="caption" color="textSecondary">
                   Following
                 </Typography>
