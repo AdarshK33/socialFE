@@ -15,8 +15,9 @@ const client = axios.create({
   },
 });
 
-const authServer = axios.create({
-  baseURL: process.env.AUTH_SERVICE_URL,
+console.log("BASE_SERVICE_URL",process.env.BASE_SERVICE_URL)
+const baseServer = axios.create({
+  baseURL: process.env.BASE_SERVICE_URL,
   // timeout: 1000 * 10,
   headers: {
     "Content-Type": "application/json",
@@ -31,10 +32,7 @@ const authServer = axios.create({
 
 
 
-// console.log("CATALOG_NEW_SERVICE_URL", process.env.CATALOG_NEW_SERVICE_URL);
-
-
-authServer.setJwtToken = (newToken) => {
+baseServer.setJwtToken = (newToken) => {
   token = newToken;
 };
 
@@ -100,7 +98,5 @@ authServer.setJwtToken = (newToken) => {
 export {
   uploadClient,
   client,
-
-  authServer,
- 
+  baseServer,
 };
