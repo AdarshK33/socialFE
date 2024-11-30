@@ -1,0 +1,62 @@
+.mainBGContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Aligns the login card to the left */
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.logo_Image {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.mainContainer {
+  display: flex;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.leftSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fdb834;
+  color: white;
+  padding: 20px;
+}
+
+.rightSection {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loginPara {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.paragraph {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
