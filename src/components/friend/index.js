@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import styles from "./dashboard.module.css";
+// import styles from "./friend.module.css";
 
 import dynamic from 'next/dynamic'
 import { useDispatch, useSelector } from "react-redux";
@@ -21,18 +21,18 @@ import {
   Grid,
 } from "@mui/material";
 
-const DashBoard = () => {
+const Friend = () => {
   let dispatch = useDispatch();
   useEffect(() => {
   
   }, []);
   return (
     <>
-      hello socail app
+      hello Friend
     </>
   );
 };
 
 
-export default React.memo(DashBoard);
+export default React.memo(Friend);
 

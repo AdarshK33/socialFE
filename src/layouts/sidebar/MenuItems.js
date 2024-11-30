@@ -1,18 +1,18 @@
 const Menuitems = [
   {
-    title: "Dashbaord",
+    title: "MyProfile",
     icon: "home",
     href: "/",
   },
   {
     title: "AddPost",
     icon: "disc",
-    href: "/addpost",
+    href: "/addPost",
   },
   {
     title: "Friend",
     icon: "layout",
-    href: "/Friend",
+    href: "/friends",
   },
 
  

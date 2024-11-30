@@ -5,12 +5,16 @@ import {
   USER_PROFILE_LOADING,
   USER_PROFILE,
   USER_PROFILE_FAILURE,
+  USER_SIGNUP_LOADING,
+  USER_SIGNUP_SUCCESS,
+  USER_SIGNUP_FAILURE,
 } from "../types/types";
 
 const initialState = {
   loading: false,
   isLogin: {},
   myProfile: {},
+  signUp:{},
 };
 const loginReducer = (state = initialState, action) => {
   // console.log("hello loginReducer called", action.payload)
@@ -54,6 +58,26 @@ const loginReducer = (state = initialState, action) => {
         myProfile: [],
         error: action,
       };
+      case USER_SIGNUP_LOADING:
+        return {
+          ...state,
+          loading: true,
+        };
+      case USER_SIGNUP_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          signUp: action.payload,
+          error: {},
+        };
+      case USER_SIGNUP_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          signUp: [],
+          error: action,
+        };
+  
 
     default:
       return state;

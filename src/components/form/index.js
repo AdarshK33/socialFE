@@ -13,7 +13,14 @@ import {
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { signUpApis } from "../../../redux/actions/login";
+
+
 const Forms = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -80,6 +87,7 @@ const Forms = () => {
     if (validate()) {
       console.log(formData, "Form submitted");
       // Process form data
+      dispatch(signUpApis(formData));
     } else {
       console.log("Validation failed");
     }

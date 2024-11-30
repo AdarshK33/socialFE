@@ -4,7 +4,10 @@ import {
   USER_LOGIN_FAILURE,
   USER_PROFILE_LOADING ,
  USER_PROFILE,
- USER_PROFILE_FAILURE 
+ USER_PROFILE_FAILURE ,
+ USER_SIGNUP_LOADING,
+ USER_SIGNUP_SUCCESS,
+ USER_SIGNUP_FAILURE,
 } from "../types/types";
 
 import { client } from "../../utils/axios";
@@ -43,6 +46,27 @@ export const myProfile = (data) => {
 export const myProfileDataFailure = (data) => {
   return {
     type: USER_PROFILE_FAILURE,
+    payload: error,
+  };
+};
+
+
+
+
+export const userSignUpLoading = () => {
+  return {
+    type: USER_SIGNUP_LOADING,
+  };
+};
+export const userSignUpSuccess = (data) => {
+  return {
+    type: USER_SIGNUP_SUCCESS,
+    payload: data,
+  };
+};
+export const userSignUpFailure = (error) => {
+  return {
+    type: USER_SIGNUP_FAILURE,
     payload: error,
   };
 };
@@ -106,3 +130,38 @@ export const myProfileApi = () => {
       });
   };
 }; 
+
+export const signUpApis = (data) => {
+  return (dispatch) => {
+    dispatch(userSignUpLoading("STATUS....", "STATUS"));
+    client
+      .post("/api/login/signUp", data)
+      .then((response) => {
+        // console.log("rrrrrr", response);
+        if (response?.data?.success ) {
+          dispatch(
+            userSignUpSuccess(
+              response.data,
+              " status Successfully",
+              "status UPDATE"
+            )
+          );
+          toast.info("sign up successfully !!!");
+        } else throw new Error("");
+      })
+      .catch((err) => {
+        toast.error("sign up failed!!!");
+        console.log(
+          "error caught in -> actions/login/sign up",
+          err
+        );
+        dispatch(
+          userSignUpFailure(
+            err,
+            "Something went wrong",
+            " "
+          )
+        );
+      });
+  };
+};

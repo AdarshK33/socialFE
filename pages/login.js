@@ -197,7 +197,7 @@ export const getServerSideProps = withIronSessionSsr(
   
       return {
         redirect: {
-          destination: "/dashboard",
+          destination: "/myProfile",
           permanent: false,
         },
       };
