@@ -57,8 +57,8 @@ const ProfileDashBoard = () => {
           {/* Avatar */}
           <Grid item xs={4} sx={{ textAlign: "center" }}>
             <Avatar
-              src={myProfile.avatar}
-              alt={myProfile.name}
+              src={myProfile?.avatar}
+              alt={myProfile?.name}
               sx={{
                 width: 120,
                 height: 120,
@@ -72,19 +72,19 @@ const ProfileDashBoard = () => {
           <Grid item xs={8}>
             <Grid container justifyContent="space-around" alignItems="center">
               <Box textAlign="center">
-                <Typography variant="h6">{dummyImages.length}</Typography>
+                <Typography variant="h6">{dummyImages?.length}</Typography>
                 <Typography variant="caption" color="textSecondary">
                   Posts
                 </Typography>
               </Box>
               <Box textAlign="center">
-                <Typography variant="h6">{myProfile.followers}</Typography>
+                <Typography variant="h6">{myProfile?.followers}</Typography>
                 <Typography variant="caption" color="textSecondary">
                   Followers
                 </Typography>
               </Box>
               <Box textAlign="center">
-                <Typography variant="h6">{myProfile.following}</Typography>
+                <Typography variant="h6">{myProfile?.following}</Typography>
                 <Typography variant="caption" color="textSecondary">
                   Following
                 </Typography>
@@ -95,21 +95,21 @@ const ProfileDashBoard = () => {
 
         {/* User Info Section */}
         <Box sx={{ marginTop: 3, textAlign: 'center' }}>
-          <Typography variant="h5">{myProfile.name}</Typography>
+          <Typography variant="h5">{myProfile?.name}</Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            @{myProfile.userName}
+            @{myProfile?.userName}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {myProfile.city || "Location not provided"}
+            {myProfile?.city || "Location not provided"}
           </Typography>
           <Typography
             variant="body2"
             sx={{
-              color: user.status === "Active" ? "green" : "red",
+              color: myProfile?.status === "Active" ? "green" : "red",
               marginTop: 1,
             }}
           >
-            Online: {myProfile.status}
+            Online: {myProfile?.status}
           </Typography>
         </Box>
 

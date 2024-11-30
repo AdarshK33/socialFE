@@ -73,7 +73,7 @@ const ProfileDD = () => {
                 ml: 1,
               }}
             >
-              {myProfile.name}
+              {myProfile?.name}
             </Typography>
             <FeatherIcon icon="chevron-down" width="20" height="20" />
           </Box>
