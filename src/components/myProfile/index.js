@@ -100,7 +100,7 @@ const ProfileDashBoard = () => {
             @{myProfile?.userName}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {myProfile?.city || "Location not provided"}
+            {myProfile?.city ?? "INDIA"}
           </Typography>
           <Typography
             variant="body2"

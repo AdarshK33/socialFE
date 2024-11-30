@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ProfileDashBoard from "../../src/components/dashboard";
+import ProfileDashBoard from "../../src/components/myProfile";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOption } from "../../utils/session";
 
