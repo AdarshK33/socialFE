@@ -1,7 +1,7 @@
 import React from "react";
 import FeatherIcon from "feather-icons-react";
 import Image from "next/image";
-import userimg from "../../../assets/images/users/user2.jpg";
+import userimg from "../../../assets/images/users/2.jpg";
 import {
   Box,
   Menu,
@@ -13,8 +13,17 @@ import {
   Button,
   Divider,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutApi } from "../../../redux/actions/logout";
 const ProfileDD = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
+  const dispatch = useDispatch();
+  // const router = useRouter();
+  const { myProfile } = useSelector((state) => {
+    return state.loginReducer;
+  });
+
+  console.log(myProfile,"myProfile")
 
   const handleClick4 = (event) => {
     setAnchorEl4(event.currentTarget);
@@ -64,7 +73,7 @@ const ProfileDD = () => {
                 ml: 1,
               }}
             >
-              Julia
+              {myProfile?.name}
             </Typography>
             <FeatherIcon icon="chevron-down" width="20" height="20" />
           </Box>
@@ -105,7 +114,7 @@ const ProfileDD = () => {
           </Box>
           <Divider />
           <Box p={2}>
-            <Link to="/">
+            <Link to="/" onClick={() => dispatch(logoutApi())}>
               <Button fullWidth variant="contained" color="primary">
                 Logout
               </Button>

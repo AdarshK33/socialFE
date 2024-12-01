@@ -13,7 +13,14 @@ import {
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { signUpApis } from "../../../redux/actions/login";
+
+
 const Forms = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -80,6 +87,7 @@ const Forms = () => {
     if (validate()) {
       console.log(formData, "Form submitted");
       // Process form data
+      dispatch(signUpApis(formData));
     } else {
       console.log("Validation failed");
     }
@@ -88,7 +96,7 @@ const Forms = () => {
   return (
     <Grid container spacing={0}>
       <Grid item xs={12} lg={12}>
-        <BaseCard title="Form Layout">
+        <BaseCard title="Social web">
           <form onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <TextField

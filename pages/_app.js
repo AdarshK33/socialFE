@@ -8,11 +8,23 @@ import theme from "../src/theme/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import FullLayout from "../src/layouts/FullLayout";
 import "../styles/style.css";
+import withRedux from "next-redux-wrapper";
+import { mainStore } from "../redux/store";
+import { myProfileApi } from "../redux/actions/login";
+import { useDispatch, useSelector } from "react-redux";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-export default function MyApp(props) {
+function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+      dispatch(myProfileApi());
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -23,7 +35,9 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <FullLayout>
+
           <Component {...pageProps} />
+          <ToastContainer/>
         </FullLayout>
       </ThemeProvider>
     </CacheProvider>
@@ -35,3 +49,4 @@ MyApp.propTypes = {
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
 };
+export default withRedux(mainStore, { debug: false })(MyApp);
