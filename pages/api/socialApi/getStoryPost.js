@@ -7,26 +7,25 @@ function handler(req, res) {
 
   const body = req.body;
   const id = body.userid
-  console.log("iiiiiiiiii",id)
+ // console.log("iiiiiiiiii",id)
   const config = {
     method: "get",
-    url: `/relation/find-friend/${id}`,
+    url: `/story/story-data/${id}`,
     headers: {
        Authorization: `Bearer ${token}`,
     },
     // data: body,
   };
 
-  // console.log("cccccccccccccccc",config)
+ // console.log("cccccccccccccccc",config)
   baseServer(config)
     .then((response) => {
       if (response) {
         res.status(200).json(response?.data);
-      
       }
     })
     .catch((err) => {
-      console.log("error caught in -> api/social/find friend", err);
+      console.log("error caught in -> api/social/get story post", err);
       // console.log(err.response);
       if (err?.response) {
         const { status = {} } = err?.response;

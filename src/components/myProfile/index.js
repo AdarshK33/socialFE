@@ -1,16 +1,23 @@
 
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Box, Typography, Grid, Button } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
+import { getStoryApi } from '../../../redux/actions/social';
 
 const ProfileDashBoard = () => {
-
+  const dispatch = useDispatch();
+  // Static friend data
   const { myProfile } = useSelector((state) => {
     return state.loginReducer;
   });
+  const { getStoryPost } = useSelector((state) => {
+    return state.socialReducer;
+  });
+  
 
+  // getStoryApi
   const user = {
     user_id: "ADMIN-4",
     name: "Adarsh Kumar",
@@ -40,6 +47,14 @@ const ProfileDashBoard = () => {
     "https://via.placeholder.com/150/800080/FFFFFF?Text=Post9",
   ];
 
+  useEffect(() => {
+    if(myProfile?.id){
+    dispatch(getStoryApi(myProfile?.id));
+    }
+  
+}, [myProfile]);
+
+console.log(getStoryPost,"getStoryPost")
   return (
     <Grid container justifyContent="center" sx={{ marginTop: 4 }}>
       <Box
@@ -72,7 +87,7 @@ const ProfileDashBoard = () => {
           <Grid item xs={8}>
             <Grid container justifyContent="space-around" alignItems="center">
               <Box textAlign="center">
-                <Typography variant="h6">{dummyImages?.length}</Typography>
+                <Typography variant="h6">{getStoryPost?.data?.length}</Typography>
                 <Typography variant="caption" color="textSecondary">
                   Posts
                 </Typography>
@@ -131,18 +146,21 @@ const ProfileDashBoard = () => {
             Posts
           </Typography>
           <Grid container spacing={2}>
-            {dummyImages.map((image, index) => (
+            
+            {getStoryPost?.data&&getStoryPost?.data.map((post,index) => (
+              
               <Grid item xs={4} key={index}>
                 <Box
                   sx={{
                     width: '100%',
                     aspectRatio: '1/1', // Ensures square images
-                    backgroundImage: `url(${image})`,
+                    backgroundImage: `url(${post.img})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     borderRadius: 2,
                     boxShadow: 2,
                   }}
+                  
                 />
               </Grid>
             ))}
