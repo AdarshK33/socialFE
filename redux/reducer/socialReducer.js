@@ -7,7 +7,7 @@ import {
   GET_STORY_SUCCESS,
   GET_STORY_FAILURE,
   
-POST_STORY_UPLOAD_LOADING,
+  POST_STORY_UPLOAD_LOADING,
 POST_STORY_UPLOAD_SUCCESS,
 POST_STORY_UPLOAD_FAILURE
 } from "../types/types";
@@ -64,6 +64,7 @@ const socialReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        uploadStoryPost: action.payload
       };
     case POST_STORY_UPLOAD_SUCCESS:
       return {

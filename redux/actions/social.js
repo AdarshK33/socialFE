@@ -53,9 +53,10 @@ import {
     };
   };
    
-  export const  storyPostUploadLoading = () => {
+  export const  storyPostUploadLoading = (status) => {
     return {
       type: POST_STORY_UPLOAD_LOADING,
+      payload: status,
     };
   };
   export const  storyPostUploadSuccess = (data) => {
@@ -157,7 +158,8 @@ import {
 
   export const storyPostUploadApi = (data) => {
     return (dispatch) => {
-      dispatch(storyPostUploadLoading("BULK....", "UPLOAD"));
+      dispatch(storyPostUploadLoading("UPLOAD"));
+      console.log( dispatch(storyPostUploadLoading("UPLOAD")),"hhhhhhhhhh")
       uploadClient
         .post("/api/socialApi/postUpload", data)
         .then((response) => {
