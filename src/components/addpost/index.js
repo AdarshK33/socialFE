@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import { Box, Avatar, IconButton, Typography, Card, CardContent, CardMedia, Button, Divider, Input } from '@mui/material';
 import { Favorite, ChatBubbleOutline, Share, MoreHoriz } from '@mui/icons-material';
 import { useDispatch, useSelector } from "react-redux";
-
+import Dropzone from "react-dropzone";
+import { Image } from 'react-feather';
+import { storyPostUploadApi } from '../../../redux/actions/social';
 const AddPost = () => {
-
+  const dispatch = useDispatch();
   const { myProfile } = useSelector((state) => {
     return state.loginReducer;
   });
@@ -14,15 +16,33 @@ const AddPost = () => {
   const [caption, setCaption] = useState('');
 
   // Handle file input change
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result); // Set the uploaded image for preview
-      };
-      reader.readAsDataURL(file);
-    }
+  const onDrop = async (acceptedFiles) => {
+    const formData = new FormData();
+    acceptedFiles.forEach((file) => {
+      formData.append("profile_pic_file", file);
+    });
+    formData.append("id", myProfile?.id);
+
+    dispatch(storyPostUploadApi(formData));
+
+    // axios
+    //   .post(
+    //     `${process.env.CATALOG_NEW_SERVICE_URL}/catalog/media/${selectItemId}`,
+    //     ś,
+    //     {
+    //       headers: {
+    //         Accept: "*/*",
+    //         "Content-Type": "multipart/form-data",
+    //         Authorization: `Bearer ${at}`,
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     toast.info("media file uploaded Successfully !!!");
+    //   })
+    //   .catch((error) => {
+    //     toast.error("media file upload Failed !!!");
+    //   });
   };
 
   // Handle caption input
@@ -51,18 +71,42 @@ const AddPost = () => {
 
       {/* Image Upload Section */}
       <CardContent>
-        <Input
-          accept="image/*"
-          id="upload-image"
-          type="file"
-          sx={{ display: 'none' }}
-          onChange={handleImageChange}
-        />
-        <label htmlFor="upload-image">
+      <Box className="dropZone-container">
+                <Dropzone
+                  onDrop={onDrop}
+                // accept={{ "image/*": [".png", ".jpg", ".jpeg"] }}
+                >
+                  {({ getRootProps, getInputProps }) => (
+                    <Box
+                      {...getRootProps()}
+                      className="dropzone col-2 p-3 text-end align-self-center d-flex"
+                    >
+                      <input {...getInputProps()} />
+                      { }
+                      <Box
+                        // className={`${styles.upload_placeholder} upload_blk`}
+                      >
+                        <Box>
+                          <Image
+                            fontSize="small"
+                            style={{
+                              fontSize: "xx-small",
+                              color: "#419794",
+                            }}
+                          />{" "}
+                          {/* Add the icon here */}
+                        </Box>
+                        <label htmlFor="upload-image">
           <Button variant="outlined" component="span" fullWidth>
             Upload Image
           </Button>
         </label>
+                      </Box>
+                    </Box>
+                  )}
+                </Dropzone>
+              </Box>
+       
 
         {/* Image Preview */}
         {image && (

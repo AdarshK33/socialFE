@@ -23,7 +23,7 @@ const ProfileDD = () => {
     return state.loginReducer;
   });
 
-  console.log(myProfile,"myProfile")
+  // console.log(myProfile.avatar,"myProfile")
 
   const handleClick4 = (event) => {
     setAnchorEl4(event.currentTarget);
@@ -42,13 +42,15 @@ const ProfileDD = () => {
         onClick={handleClick4}
       >
         <Box display="flex" alignItems="center">
+          {myProfile?.avatar &&
           <Image
-            src={userimg}
-            alt={userimg}
-            width="30"
-            height="30"
+            src={myProfile.avatar}
+            alt="profileDD.js"
+            width="30px"
+            height="30px"
             className="roundedCircle"
           />
+}
           <Box
             sx={{
               display: {

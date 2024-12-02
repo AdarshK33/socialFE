@@ -3,11 +3,14 @@ import {
     FIND_FRIEND_SUCCESS,
     FIND_FRIEND_FAILURE,
     GET_STORY_LOADING,
-GET_STORY_SUCCESS,
-GET_STORY_FAILURE
+    GET_STORY_SUCCESS,
+    GET_STORY_FAILURE,
+    POST_STORY_UPLOAD_LOADING,
+    POST_STORY_UPLOAD_SUCCESS,
+    POST_STORY_UPLOAD_FAILURE
   } from "../types/types";
   
-  import { client } from "../../utils/axios";
+  import { client,uploadClient } from "../../utils/axios";
   import { toast } from "react-toastify";
   
  
@@ -50,7 +53,29 @@ GET_STORY_FAILURE
     };
   };
    
-  
+  export const  storyPostUploadLoading = () => {
+    return {
+      type: POST_STORY_UPLOAD_LOADING,
+    };
+  };
+  export const  storyPostUploadSuccess = (data) => {
+    return {
+      type: POST_STORY_UPLOAD_SUCCESS,
+      payload: data,
+    };
+  };
+  export const storyPostUploadFailure = (error) => {
+    return {
+      type: POST_STORY_UPLOAD_FAILURE,
+      payload: error,
+    };
+  };
+   
+
+
+
+
+
   export const getFindFriend = (userid) => {
     const data = {
       userid: userid,
@@ -124,6 +149,35 @@ GET_STORY_FAILURE
               " "
             )
           );
+        });
+    };
+  };
+
+
+
+  export const storyPostUploadApi = (data) => {
+    return (dispatch) => {
+      dispatch(storyPostUploadLoading("BULK....", "UPLOAD"));
+      uploadClient
+        .post("/api/socialApi/postUpload", data)
+        .then((response) => {
+          toast.info("Post file uploaded successfully !!!");
+        dispatch(
+          storyPostUploadSuccess(
+              "Post Upload Successfully",
+              "Post Upload ",
+              response
+            )
+          ); // } else throw new Error("");
+        })
+        .catch((err) => {
+          console.log(
+            "error caught in -> actions/socialApi/storyPostUploadApi",
+            err
+          );
+          dispatch(
+            storyPostUploadFailure(err, "Something went wrong", "storyPostUploadApi")
+             );
         });
     };
   };
