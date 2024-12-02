@@ -2,11 +2,20 @@ import React, { useState, useEffect } from "react";
 import styles from "./friend.module.css";
 
 // import dynamic from 'next/dynamic'
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getFindFriend } from "../../../redux/actions/social";
 
 
 const Friend = () => {
+  const dispatch = useDispatch();
   // Static friend data
+  const { myProfile } = useSelector((state) => {
+    return state.loginReducer;
+  });
+  const { findFriend } = useSelector((state) => {
+    return state.socialReducer;
+  });
+  //getFindFriend
   const friends = [
     { id: 1, name: "John Doe", imageUrl: "https://via.placeholder.com/50" },
     { id: 2, name: "Jane Smith", imageUrl: "https://via.placeholder.com/50" },
@@ -20,15 +29,23 @@ const Friend = () => {
   const handleFollow = (friendId) => {
     console.log(`Followed friend with ID: ${friendId}`);
   };
+  useEffect(() => {
+    if(myProfile?.id){
+    dispatch(getFindFriend(myProfile?.id));
+    }
+  
+}, [myProfile]);
 
+
+console.log(findFriend?.data,"findFriend")
   return (
     <div className={styles.find_friends}>
       <h2>Find Friends</h2>
       <div className={styles.friend_list}>
-        {friends.map((friend) => (
+        {findFriend?.data&&findFriend?.data.map((friend) => (
           <div key={friend.id} className={styles.friend_card}>
             <img
-              src={friend.imageUrl}
+              src={friend.avatar}
               alt={friend.name}
               className={styles.friend_image}
             />

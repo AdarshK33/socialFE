@@ -18,9 +18,6 @@ export default function Index() {
   };
 
   useEffect(() => {
-
-   
-    
       if(isLogin){
       dispatch(userSignUpSuccess());
       }

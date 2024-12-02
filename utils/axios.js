@@ -32,9 +32,9 @@ const baseServer = axios.create({
 
 
 
-baseServer.setJwtToken = (newToken) => {
-  token = newToken;
-};
+// baseServer.setJwtToken = (newToken) => {
+//   token = newToken;
+// };
 
 
 // server.setSessionId = SessionId => {
