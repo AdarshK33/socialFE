@@ -45,8 +45,7 @@
   }
   
   .friend_card:hover {
-    transform: scale(1.02); /* Slightly scale up on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+    background-color: darkcyan; 
   }
   
   .friend_image {
