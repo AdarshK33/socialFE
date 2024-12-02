@@ -12,6 +12,7 @@ import {
   ListItemText,
   Button,
   Divider,
+  Avatar,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutApi } from "../../../redux/actions/logout";
@@ -43,13 +44,24 @@ const ProfileDD = () => {
       >
         <Box display="flex" alignItems="center">
           {myProfile?.avatar &&
-          <Image
-            src={myProfile.avatar}
-            alt="profileDD.js"
-            width="30px"
-            height="30px"
-            className="roundedCircle"
-          />
+          // <Image
+          //   src={myProfile.avatar}
+          //   alt="profileDD.js"
+          //   width="30px"
+          //   height="30px"
+          //   className="roundedCircle"
+          // />
+
+          <Avatar
+          src={myProfile?.avatar}
+          alt={myProfile?.name??"no name"}
+          sx={{
+            width: 50,
+            height: 50,
+            margin: '0 auto',
+            border: '2px solid #DEA3B7',
+          }}
+        />
 }
           <Box
             sx={{
